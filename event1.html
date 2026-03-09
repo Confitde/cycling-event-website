@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mountain Endurance Ride | CycloSportsEndurance</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#111;
+color:white;
+}
+
+/* NAVBAR */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:black;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#ff4c29;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+}
+
+nav a:hover{
+color:#ff4c29;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+url("https://images.unsplash.com/photo-1518655048521-f130df041f66");
+background-size:cover;
+background-position:center;
+padding:100px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+}
+
+/* CONTENT */
+
+.container{
+width:80%;
+margin:auto;
+padding:40px 0;
+}
+
+.card{
+background:#1f1f1f;
+padding:30px;
+margin-bottom:30px;
+border-radius:10px;
+}
+
+h2{
+color:#ff4c29;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:5px;
+}
+
+button{
+background:#ff4c29;
+color:white;
+border:none;
+padding:12px 20px;
+cursor:pointer;
+}
+
+button:hover{
+background:#e63e1f;
+}
+
+#popup{
+display:none;
+position:fixed;
+top:40%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+padding:30px;
+border-radius:8px;
+}
+
+footer{
+background:black;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">CycloSportsEndurance</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="events.html">Events</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+<div class="hero">
+<h1>Mountain Endurance Ride</h1>
+<p>3 May 2026 • 80 KM Challenge</p>
+<h2 id="countdown"></h2>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Event Details</h2>
+
+<p><b>Reporting Time:</b> 5:30 AM</p>
+<p><b>Ride Start:</b> 6:00 AM</p>
+<p><b>Distance:</b> 80 KM</p>
+<p><b>Slots Remaining:</b> <span id="slots">120</span></p>
+
+</div>
+
+<div class="card">
+
+<h2>Register</h2>
+
+<form onsubmit="register(event)">
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="email" placeholder="Email">
+
+<input type="number" placeholder="Age">
+
+<select>
+<option>Elite Riders</option>
+<option>Masters</option>
+<option>Women Open</option>
+</select>
+
+<button type="submit">Register</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div id="popup">
+<h3>Registration Successful 🚴</h3>
+</div>
+
+<footer>
+© 2026 CycloSportsEndurance
+</footer>
+
+<script>
+
+var eventDate = new Date("May 3, 2026 06:00:00").getTime();
+
+setInterval(function(){
+
+var now = new Date().getTime();
+var distance = eventDate - now;
+
+var days = Math.floor(distance/(1000*60*60*24));
+var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+document.getElementById("countdown").innerHTML =
+days+" Days "+hours+" Hours "+minutes+" Minutes Remaining";
+
+},1000);
+
+function register(e){
+
+e.preventDefault();
+
+var slots = document.getElementById("slots");
+slots.innerText = slots.innerText - 1;
+
+document.getElementById("popup").style.display="block";
+
+setTimeout(function(){
+document.getElementById("popup").style.display="none";
+},3000);
+
+}
+
+</script>
+
+</body>
+</html>
